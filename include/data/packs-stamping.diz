@@ -1,0 +1,4 @@
+zip||zip -z -D -r -9 "%pack" . < "%comment"
+rar||rar c "%pack" . < "%comment"
+rar5||rar c "%pack" . < "%comment"
+exe||rar c "%pack" . < "%comment"
