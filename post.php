@@ -395,7 +395,7 @@
             yonkSealSighting($sightingid);
             if ($archive = yonkLicensingArchive($sightingid, $inner['file'], $inner['format']))
             {
-                $packfile = (count($licenses)>1?"Licenses ~ ":"License ~ ") . $inner['name'] . ' v' . $inner['version'] . '.' . $inner['format'];
+                $packfile = (count($licenses)>1?"Licenses ~ ":"License ~ ") . $inner['name'] . ' v' . $inner['major'] . '.' . $inner['minor'] . '.' . $inner['revision'] . '.' . $inner['subrevision'] . '.' . $inner['format'];
                 if(ini_get('zlib.output_compression')) {
                     ini_set('zlib.output_compression', 'Off');
                 }

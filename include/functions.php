@@ -25,7 +25,7 @@ define('_API_FATAL_BACKTRACE', 'Error: %s<br/><br/>%s');
 
 require_once __DIR__.'/common.php';
 require_once dirname(__DIR__).'/class/cache/apicache.php';
-require_once dirname(__DIR__).'/class/xcp.class.php';
+require_once dirname(__DIR__).'/class/xcp/xcp.class.php';
 
 if (!function_exists("getURIData")) {
     
@@ -36,17 +36,41 @@ if (!function_exists("getURIData")) {
      *
      * @return 		float()
      */
-    function getURIData($uri = '', $timeout = 25, $connectout = 25)
+    function getURIData($uri = '', $timeout = 25, $connectout = 25, $post = array(), $headers = array())
     {
         if (!function_exists("curl_init"))
         {
-            return file_get_contents($uri);
+            die("Install PHP Curl Extension ie: $ sudo apt-get install php-curl -y");
         }
+        $GLOBALS['php-curl'][md5($uri)] = array();
         if (!$btt = curl_init($uri)) {
             return false;
         }
-        curl_setopt($btt, CURLOPT_HEADER, 0);
-        curl_setopt($btt, CURLOPT_POST, 0);
+        if (count($post)==0 || empty($post))
+            curl_setopt($btt, CURLOPT_POST, false);
+        else {
+            $uploadfile = false;
+            foreach($post as $field => $value)
+                if (substr($value , 0, 1) == '@' && !file_exists(substr($value , 1, strlen($value) - 2)))
+                    unset($post[$field]);
+                else 
+                    $uploadfile = true;
+            curl_setopt($btt, CURLOPT_POST, true);
+            curl_setopt($btt, CURLOPT_POSTFIELDS, http_build_query($post));
+            
+            if (!empty($headers))
+                foreach($headers as $key => $value)
+                    if ($uploadfile==true && substr($value, 0, strlen('Content-Type:')) == 'Content-Type:')
+                        unset($headers[$key]);
+            if ($uploadfile==true)
+                $headers[]  = 'Content-Type: multipart/form-data';
+        }
+        if (count($headers)==0 || empty($headers))
+            curl_setopt($btt, CURLOPT_HEADER, false);
+        else {
+            curl_setopt($btt, CURLOPT_HEADER, true);
+            curl_setopt($btt, CURLOPT_HTTPHEADER, $headers);
+        }
         curl_setopt($btt, CURLOPT_CONNECTTIMEOUT, $connectout);
         curl_setopt($btt, CURLOPT_TIMEOUT, $timeout);
         curl_setopt($btt, CURLOPT_RETURNTRANSFER, true);
@@ -54,6 +78,16 @@ if (!function_exists("getURIData")) {
         curl_setopt($btt, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($btt, CURLOPT_SSL_VERIFYPEER, false);
         $data = curl_exec($btt);
+        $GLOBALS['php-curl'][md5($uri)]['http']['posts'] = $post;
+        $GLOBALS['php-curl'][md5($uri)]['http']['headers'] = $headers;
+        $GLOBALS['php-curl'][md5($uri)]['http']['code'] = curl_getinfo($btt, CURLINFO_HTTP_CODE);
+        $GLOBALS['php-curl'][md5($uri)]['header']['size'] = curl_getinfo($btt, CURLINFO_HEADER_SIZE);
+        $GLOBALS['php-curl'][md5($uri)]['header']['value'] = curl_getinfo($btt, CURLINFO_HEADER_OUT);
+        $GLOBALS['php-curl'][md5($uri)]['size']['download'] = curl_getinfo($btt, CURLINFO_SIZE_DOWNLOAD);
+        $GLOBALS['php-curl'][md5($uri)]['size']['upload'] = curl_getinfo($btt, CURLINFO_SIZE_UPLOAD);
+        $GLOBALS['php-curl'][md5($uri)]['content']['length']['download'] = curl_getinfo($btt, CURLINFO_CONTENT_LENGTH_DOWNLOAD);
+        $GLOBALS['php-curl'][md5($uri)]['content']['length']['upload'] = curl_getinfo($btt, CURLINFO_CONTENT_LENGTH_UPLOAD);
+        $GLOBALS['php-curl'][md5($uri)]['content']['type'] = curl_getinfo($btt, CURLINFO_CONTENT_TYPE);
         curl_close($btt);
         return $data;
     }
@@ -471,7 +505,7 @@ if (!function_exists("yonkHTMLForms")) {
                 $form[] = "\t\t\t<td colspan='2'>";
                 $form[] = "\t\t\t\t<select name='format' id='format'>";
                 foreach(array_keys(yonkArchivingShellExec()) as $format)
-                    $form[] = "\t\t\t\t\t<option value='".$format."'>License(s) - Distribution Name v1.0.1.".$format."</option>";
+                    $form[] = "\t\t\t\t\t<option value='".$format."'>License(s) - Distribution Name v1.0.1.1.".$format."</option>";
                 $form[] = "\t\t\t\t</select>";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t</tr>";
@@ -579,10 +613,13 @@ if (!function_exists('yonkLicensingArchive'))
             } else 
                 $file = $license['filename'];
             writeRawFile($workingdir . DIRECTORY_SEPARATOR . $file, $license['license']);
+            $json['licenses'][$licence['code']]['local']['title'] = $license['title'];
+            $json['licenses'][$licence['code']]['local']['code'] = $license['code'];
             $json['licenses'][$licence['code']]['local']['filename'] = $file;
             $json['licenses'][$licence['code']]['local']['words'] = $license['words'];
             $json['licenses'][$licence['code']]['local']['md5'] = md5_file($workingdir . DIRECTORY_SEPARATOR . $file);
             $json['licenses'][$licence['code']]['local']['bytes'] = filesize($workingdir . DIRECTORY_SEPARATOR . $file);
+            $json['licenses'][$licence['code']]['local']['mtime'] = filemtime($workingdir . DIRECTORY_SEPARATOR . $file);
             $bytes = $bytes + filesize($workingdir . DIRECTORY_SEPARATOR . $file);
             $words = $words + $license['words'];
             $json['licenses'][$licence['code']]['remote']['text'] = API_URL . "/v1/license/".$licence['code']."/text.api";

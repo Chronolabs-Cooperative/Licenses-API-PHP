@@ -54,8 +54,8 @@ if (!class_exists('xcp'))
 		{
 			$this->seed = $seed;
 			$this->length = $len;
-			$this->base = new xcp_base((int)$seed);
-			$this->enum = new xcp_enumerator($this->base);
+			$this->base = new xcp_base($this->seed);
+			$this->enum = new xcp_enumerator($this->base, $this->length);
 			
 			if (!empty($data))
 			{
