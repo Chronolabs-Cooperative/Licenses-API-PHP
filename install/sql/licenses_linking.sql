@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `licenses_linking`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `licenses_linking` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `parent-id` mediumint(20) NOT NULL DEFAULT '0',
-  `child-id` mediumint(20) NOT NULL DEFAULT '0',
-  `created` int(12) DEFAULT '0',
+  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `parent-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `child-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `created` int(12) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `SEARCH` (`parent-id`,`child-id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:03
+-- Dump completed on 2017-12-14 22:57:16

@@ -16,40 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `signing_organisations`
+-- Table structure for table `phones`
 --
 
-DROP TABLE IF EXISTS `signing_organisations`;
+DROP TABLE IF EXISTS `phones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `signing_organisations` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `realm` varchar(255) NOT NULL DEFAULT '',
-  `name` varchar(128) NOT NULL DEFAULT '',
-  `address-id` mediumint(20) NOT NULL DEFAULT '0',
-  `general-phone-id` mediumint(20) NOT NULL DEFAULT '0',
-  `sales-phone-id` mediumint(20) NOT NULL DEFAULT '0',
-  `support-phone-id` mediumint(20) NOT NULL DEFAULT '0',
-  `accounts-phone-id` mediumint(20) NOT NULL DEFAULT '0',
-  `general-email-id` mediumint(20) NOT NULL DEFAULT '0',
-  `sales-email-id` mediumint(20) NOT NULL DEFAULT '0',
-  `support-email-id` mediumint(20) NOT NULL DEFAULT '0',
-  `accounts-email-id` mediumint(20) NOT NULL DEFAULT '0',
-  `rbn` varchar(16) NOT NULL DEFAULT '',
-  `dor` int(13) NOT NULL DEFAULT '0',
-  `created` int(13) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`realm`,`name`,`rbn`)
+CREATE TABLE `phones` (
+  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `country-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `typal` enum('individual','home','office','headoffice','diplomatic','government','facility','educational','whois-ipv4','whois-ipv6','whois-realm','other') NOT NULL DEFAULT 'other',
+  `country` varchar(4) NOT NULL DEFAULT '',
+  `area` varchar(6) NOT NULL DEFAULT '',
+  `number` varchar(16) NOT NULL DEFAULT '',
+  `timezone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `quanity` int(8) unsigned NOT NULL DEFAULT '0',
+  `created` int(13) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `signing_organisations`
+-- Dumping data for table `phones`
 --
 
-LOCK TABLES `signing_organisations` WRITE;
-/*!40000 ALTER TABLE `signing_organisations` DISABLE KEYS */;
-/*!40000 ALTER TABLE `signing_organisations` ENABLE KEYS */;
+LOCK TABLES `phones` WRITE;
+/*!40000 ALTER TABLE `phones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `phones` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -61,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:03
+-- Dump completed on 2017-12-14 22:57:16

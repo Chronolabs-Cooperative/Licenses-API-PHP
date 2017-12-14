@@ -23,20 +23,20 @@ DROP TABLE IF EXISTS `signing_licenses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `signing_licenses` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `sighting-id` mediumint(20) NOT NULL DEFAULT '0',
-  `license` blob,
+  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `license-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `sighting-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `signing-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
   `md5` varchar(32) NOT NULL DEFAULT '',
-  `sha1` varchar(32) NOT NULL DEFAULT '',
-  `bytes` int(8) NOT NULL DEFAULT '0',
-  `sites` int(8) NOT NULL DEFAULT '0',
-  `created` int(13) NOT NULL DEFAULT '0',
-  `issued` int(13) NOT NULL DEFAULT '0',
-  `regrade` int(13) NOT NULL DEFAULT '0',
-  `revoked` int(13) NOT NULL DEFAULT '0',
-  `recovery` int(13) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`license`(32),`md5`)
+  `sha1` varchar(44) NOT NULL DEFAULT '',
+  `bytes` int(8) unsigned NOT NULL DEFAULT '0',
+  `sites` int(8) unsigned NOT NULL DEFAULT '0',
+  `created` int(13) unsigned NOT NULL DEFAULT '0',
+  `issued` int(13) unsigned NOT NULL DEFAULT '0',
+  `regrade` int(13) unsigned NOT NULL DEFAULT '0',
+  `revoked` int(13) unsigned NOT NULL DEFAULT '0',
+  `recovery` int(13) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:04
+-- Dump completed on 2017-12-14 22:57:17

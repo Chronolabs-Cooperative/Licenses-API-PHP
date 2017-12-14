@@ -16,58 +16,52 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `authkeys`
+-- Table structure for table `hives_signing`
 --
 
-DROP TABLE IF EXISTS `authkeys`;
+DROP TABLE IF EXISTS `hives_signing`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `authkeys` (
+CREATE TABLE `hives_signing` (
   `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `typal` enum('development','live','enterprise','closed') NOT NULL DEFAULT 'closed',
-  `limited` enum('Yes','No') NOT NULL DEFAULT 'No',
-  `banning` enum('Yes','No') NOT NULL DEFAULT 'No',
-  `filings` enum('Yes','No') NOT NULL DEFAULT 'No',
-  `posting` enum('Yes','No') NOT NULL DEFAULT 'No',
-  `getting` enum('Yes','No') NOT NULL DEFAULT 'No',
-  `queries` int(8) unsigned NOT NULL DEFAULT '0',
-  `quering` int(8) unsigned NOT NULL DEFAULT '0',
-  `passing` int(8) unsigned NOT NULL DEFAULT '0',
-  `failing` int(8) unsigned NOT NULL DEFAULT '0',
-  `requote` int(13) unsigned NOT NULL DEFAULT '0',
-  `uid` int(13) unsigned NOT NULL DEFAULT '0',
+  `hive-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
   `sighting-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `signing-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `signed-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `authkey-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `organisation-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `individual-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
   `site-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `email-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `prefix` varchar(255) NOT NULL DEFAULT '',
-  `suffix` varchar(255) NOT NULL DEFAULT '',
-  `md5` varchar(32) NOT NULL DEFAULT '',
-  `sha1` varchar(44) NOT NULL DEFAULT '',
-  `file` varchar(128) NOT NULL DEFAULT '',
-  `fields` tinytext,
-  `blowfish` tinytext,
-  `bytes` int(8) unsigned NOT NULL DEFAULT '0',
-  `width` int(8) unsigned NOT NULL DEFAULT '0',
-  `height` int(8) unsigned NOT NULL DEFAULT '0',
-  `segment` int(8) unsigned NOT NULL DEFAULT '0',
-  `lengths` int(8) unsigned NOT NULL DEFAULT '0',
+  `uid` int(13) unsigned NOT NULL DEFAULT '0',
+  `local` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `remote` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `master` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `child` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `issued` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `valid` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `loading` float(20,14) unsigned NOT NULL DEFAULT '0.00000000000000',
+  `authing` int(20) unsigned NOT NULL DEFAULT '0',
+  `tokens` int(20) unsigned NOT NULL DEFAULT '0',
+  `verify` int(13) unsigned NOT NULL DEFAULT '0',
+  `reauth` int(13) unsigned NOT NULL DEFAULT '0',
+  `signed` int(13) unsigned NOT NULL DEFAULT '0',
+  `quoted` int(13) unsigned NOT NULL DEFAULT '0',
+  `called` int(13) unsigned NOT NULL DEFAULT '0',
+  `polled` int(13) unsigned NOT NULL DEFAULT '0',
+  `failed` int(13) unsigned NOT NULL DEFAULT '0',
+  `events` int(13) unsigned NOT NULL DEFAULT '0',
   `created` int(13) unsigned NOT NULL DEFAULT '0',
-  `authing` int(13) unsigned NOT NULL DEFAULT '0',
-  `reissued` int(13) unsigned NOT NULL DEFAULT '0',
-  `reissuing` int(13) unsigned NOT NULL DEFAULT '0',
-  `recovered` int(13) unsigned NOT NULL DEFAULT '0',
+  `revoked` int(13) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `authkeys`
+-- Dumping data for table `hives_signing`
 --
 
-LOCK TABLES `authkeys` WRITE;
-/*!40000 ALTER TABLE `authkeys` DISABLE KEYS */;
-/*!40000 ALTER TABLE `authkeys` ENABLE KEYS */;
+LOCK TABLES `hives_signing` WRITE;
+/*!40000 ALTER TABLE `hives_signing` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hives_signing` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

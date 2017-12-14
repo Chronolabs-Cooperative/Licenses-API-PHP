@@ -16,37 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `signing_individuals`
+-- Table structure for table `whois_netbios`
 --
 
-DROP TABLE IF EXISTS `signing_individuals`;
+DROP TABLE IF EXISTS `whois_netbios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `signing_individuals` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `prefix` varchar(10) NOT NULL DEFAULT '',
-  `firstname` varchar(128) NOT NULL DEFAULT '',
-  `surname` varchar(128) NOT NULL DEFAULT '',
-  `gender` enum('male','female','other') NOT NULL DEFAULT 'other',
-  `dob` int(13) NOT NULL DEFAULT '0',
-  `mobile-phone-id` mediumint(20) NOT NULL DEFAULT '0',
-  `work-phone-id` mediumint(20) NOT NULL DEFAULT '0',
-  `home-phone-id` mediumint(20) NOT NULL DEFAULT '0',
-  `work-email-id` mediumint(20) NOT NULL DEFAULT '0',
-  `home-email-id` mediumint(20) NOT NULL DEFAULT '0',
-  `created` int(13) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`prefix`,`firstname`,`surname`,`gender`,`dob`)
+CREATE TABLE `whois_netbios` (
+  `id` mediumint(255) unsigned NOT NULL AUTO_INCREMENT,
+  `state` enum('current','historical') NOT NULL DEFAULT 'current',
+  `netbios-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `whois-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `created` int(13) unsigned NOT NULL DEFAULT '0',
+  `history` int(13) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `signing_individuals`
+-- Dumping data for table `whois_netbios`
 --
 
-LOCK TABLES `signing_individuals` WRITE;
-/*!40000 ALTER TABLE `signing_individuals` DISABLE KEYS */;
-/*!40000 ALTER TABLE `signing_individuals` ENABLE KEYS */;
+LOCK TABLES `whois_netbios` WRITE;
+/*!40000 ALTER TABLE `whois_netbios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `whois_netbios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:04
+-- Dump completed on 2017-12-14 22:57:18

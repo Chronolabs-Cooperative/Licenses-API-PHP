@@ -16,30 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `signing_phones`
+-- Table structure for table `whois_phones`
 --
 
-DROP TABLE IF EXISTS `signing_phones`;
+DROP TABLE IF EXISTS `whois_phones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `signing_phones` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `country` varchar(4) NOT NULL DEFAULT '',
-  `area` varchar(6) NOT NULL DEFAULT '',
-  `number` varchar(16) NOT NULL DEFAULT '',
-  `created` int(13) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`country`,`area`,`number`)
+CREATE TABLE `whois_phones` (
+  `id` mediumint(255) unsigned NOT NULL AUTO_INCREMENT,
+  `state` enum('current','historical') NOT NULL DEFAULT 'current',
+  `phone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `whois-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `created` int(13) unsigned NOT NULL DEFAULT '0',
+  `history` int(13) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `signing_phones`
+-- Dumping data for table `whois_phones`
 --
 
-LOCK TABLES `signing_phones` WRITE;
-/*!40000 ALTER TABLE `signing_phones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `signing_phones` ENABLE KEYS */;
+LOCK TABLES `whois_phones` WRITE;
+/*!40000 ALTER TABLE `whois_phones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `whois_phones` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:04
+-- Dump completed on 2017-12-14 22:57:17

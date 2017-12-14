@@ -23,27 +23,36 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `users` (
-  `uid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) NOT NULL DEFAULT '',
+  `uid` int(13) unsigned NOT NULL AUTO_INCREMENT,
+  `state` enum('unvalidated','verified','invalid','banned','other') NOT NULL DEFAULT 'other',
+  `type` enum('local','remote','individual','organisation','site','other') NOT NULL DEFAULT 'other',
+  `organisation-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `individual-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `site-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `email-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `url-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `hive-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `hive-uid` int(13) unsigned NOT NULL DEFAULT '0',
+  `service-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `type-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `command-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
   `uname` varchar(25) NOT NULL DEFAULT '',
-  `email` varchar(60) NOT NULL DEFAULT '',
-  `url` varchar(100) NOT NULL DEFAULT '',
-  `api_avatar` varchar(30) NOT NULL DEFAULT 'blank.gif',
-  `api_regdate` int(10) unsigned NOT NULL DEFAULT '0',
-  `api_from` varchar(100) NOT NULL DEFAULT '',
-  `api_sig` tinytext,
+  `avatar` varchar(30) NOT NULL DEFAULT 'blank.gif',
+  `regdate` int(10) unsigned NOT NULL DEFAULT '0',
+  `from` varchar(100) NOT NULL DEFAULT '',
+  `sig` tinytext,
   `actkey` varchar(8) NOT NULL DEFAULT '',
   `pass` varchar(255) NOT NULL DEFAULT '',
-  `hits` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `attachsig` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `timezone` varchar(150) NOT NULL DEFAULT '',
+  `licenses` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `sightings` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `signings` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `authkeys` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `tokens` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `timezone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
   `last_online` int(10) unsigned NOT NULL DEFAULT '0',
-  `last_login` int(10) unsigned NOT NULL DEFAULT '0',
-  `api_mailok` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  PRIMARY KEY (`uid`),
-  KEY `uname` (`uname`),
-  KEY `email` (`email`),
-  KEY `uiduname` (`uid`,`uname`)
+  `last_authed` int(10) unsigned NOT NULL DEFAULT '0',
+  `mailing` enum('Yes','No','Undelievered') NOT NULL DEFAULT 'Yes',
+  PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,4 +74,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:03
+-- Dump completed on 2017-12-14 22:57:17

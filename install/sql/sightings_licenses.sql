@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `sightings_licenses`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sightings_licenses` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `sighting-id` mediumint(20) NOT NULL DEFAULT '0',
-  `license-id` mediumint(20) NOT NULL DEFAULT '0',
-  `created` int(13) NOT NULL DEFAULT '0',
+  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sighting-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `license-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `created` int(13) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `SEARCH` (`sighting-id`,`license-id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:04
+-- Dump completed on 2017-12-14 22:57:17

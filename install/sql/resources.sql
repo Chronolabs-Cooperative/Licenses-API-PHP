@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `resources`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `resources` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
+  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
   `fingerprint` varchar(44) NOT NULL,
   `text` longtext,
   `html` longtext,
-  `words-text` int(8) NOT NULL DEFAULT '0',
-  `words-html` int(8) NOT NULL DEFAULT '0',
-  `quotes` int(8) NOT NULL DEFAULT '0',
-  `created` int(13) NOT NULL DEFAULT '0',
-  `accessed` int(13) NOT NULL DEFAULT '0',
+  `words-text` int(8) unsigned NOT NULL DEFAULT '0',
+  `words-html` int(8) unsigned NOT NULL DEFAULT '0',
+  `quotes` int(8) unsigned NOT NULL DEFAULT '0',
+  `created` int(13) unsigned NOT NULL DEFAULT '0',
+  `accessed` int(13) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:03
+-- Dump completed on 2017-12-14 22:57:16

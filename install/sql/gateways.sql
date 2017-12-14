@@ -16,29 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `signing_emails`
+-- Table structure for table `gateways`
 --
 
-DROP TABLE IF EXISTS `signing_emails`;
+DROP TABLE IF EXISTS `gateways`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `signing_emails` (
+CREATE TABLE `gateways` (
   `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) NOT NULL DEFAULT '',
-  `sent` int(13) NOT NULL DEFAULT '0',
-  `created` int(13) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`email`,`sent`)
+  `name` varchar(45) NOT NULL DEFAULT '',
+  `dirname` varchar(45) NOT NULL DEFAULT '',
+  `enabled` enum('Yes','No') NOT NULL DEFAULT 'Yes',
+  `author` varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `signing_emails`
+-- Dumping data for table `gateways`
 --
 
-LOCK TABLES `signing_emails` WRITE;
-/*!40000 ALTER TABLE `signing_emails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `signing_emails` ENABLE KEYS */;
+LOCK TABLES `gateways` WRITE;
+/*!40000 ALTER TABLE `gateways` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gateways` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:03
+-- Dump completed on 2017-12-14 22:57:17

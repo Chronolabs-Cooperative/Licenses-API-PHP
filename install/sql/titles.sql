@@ -23,13 +23,14 @@ DROP TABLE IF EXISTS `titles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `titles` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
+  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `quotes` int(8) NOT NULL DEFAULT '0',
-  `licenses` int(8) NOT NULL DEFAULT '0',
-  `sightings` int(8) NOT NULL DEFAULT '0',
-  `versions` int(8) NOT NULL DEFAULT '0',
-  `created` int(12) NOT NULL DEFAULT '0',
+  `quotes` int(8) unsigned NOT NULL DEFAULT '0',
+  `licenses` int(8) unsigned NOT NULL DEFAULT '0',
+  `sightings` int(8) unsigned NOT NULL DEFAULT '0',
+  `signings` int(8) unsigned NOT NULL DEFAULT '0',
+  `versions` int(8) unsigned NOT NULL DEFAULT '0',
+  `created` int(12) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -40,7 +41,6 @@ CREATE TABLE `titles` (
 
 LOCK TABLES `titles` WRITE;
 /*!40000 ALTER TABLE `titles` DISABLE KEYS */;
-INSERT INTO `titles` VALUES (1,'Academic Public License',0,1,0,0,1513035916),(2,'Free Documentation License',0,2,0,0,1513037077),(3,'Library General Public License',0,1,0,0,1513037344),(4,'Lesser General Public License',0,1,0,0,1513037496),(5,'General Public License',0,3,0,0,1513037648),(6,'Chronolabs Cooperative General Software License',0,1,0,0,1513040190),(7,'Chronolabs Cooperative End User License',0,1,0,0,1513040279),(8,'Creative Commons',0,12,0,0,1513040616);
 /*!40000 ALTER TABLE `titles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:04
+-- Dump completed on 2017-12-14 22:57:18

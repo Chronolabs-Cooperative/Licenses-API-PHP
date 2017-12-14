@@ -16,36 +16,52 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `codes`
+-- Table structure for table `authkeys_tokens`
 --
 
-DROP TABLE IF EXISTS `codes`;
+DROP TABLE IF EXISTS `authkeys_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `codes` (
+CREATE TABLE `authkeys_tokens` (
   `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(16) NOT NULL DEFAULT '',
+  `typal` enum('development','live','enterprise','closed') NOT NULL DEFAULT 'closed',
+  `authenticate` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `expireonuse` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `expired` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `graced` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `userdata` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `usages` int(8) unsigned NOT NULL DEFAULT '0',
+  `queries` int(8) unsigned NOT NULL DEFAULT '0',
+  `expires` int(13) unsigned NOT NULL DEFAULT '0',
+  `graces` int(13) unsigned NOT NULL DEFAULT '0',
   `uid` int(13) unsigned NOT NULL DEFAULT '0',
-  `service-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `service-type-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `quotes` int(8) unsigned NOT NULL DEFAULT '0',
-  `licenses` int(8) unsigned NOT NULL DEFAULT '0',
-  `sightings` int(8) unsigned NOT NULL DEFAULT '0',
-  `signings` int(8) unsigned NOT NULL DEFAULT '0',
+  `formulas` tinytext,
+  `token` tinytext,
+  `token-md5` varchar(32) NOT NULL DEFAULT '',
+  `token-sha1` varchar(44) NOT NULL DEFAULT '',
+  `authed-netbios-ids` longblob,
+  `authed-netbios-ipv4-ids` longblob,
+  `authed-netbios-ipv6-ids` longblob,
+  `authed-realm-ids` longblob,
+  `authed-realm-ipv4-ids` longblob,
+  `authed-realm-ipv6-ids` longblob,
+  `authed-last` mediumblob,
+  `fieldname` varchar(255) NOT NULL DEFAULT 'auth_token',
+  `bytes` int(8) unsigned NOT NULL DEFAULT '0',
   `created` int(13) unsigned NOT NULL DEFAULT '0',
-  `accessed` int(13) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+  `deleted` int(13) unsigned NOT NULL DEFAULT '0',
+  `timezone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `codes`
+-- Dumping data for table `authkeys_tokens`
 --
 
-LOCK TABLES `codes` WRITE;
-/*!40000 ALTER TABLE `codes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `codes` ENABLE KEYS */;
+LOCK TABLES `authkeys_tokens` WRITE;
+/*!40000 ALTER TABLE `authkeys_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `authkeys_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +73,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-14 22:57:17
+-- Dump completed on 2017-12-14 22:57:18

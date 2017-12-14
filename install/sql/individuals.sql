@@ -16,36 +16,45 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `codes`
+-- Table structure for table `individuals`
 --
 
-DROP TABLE IF EXISTS `codes`;
+DROP TABLE IF EXISTS `individuals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `codes` (
+CREATE TABLE `individuals` (
   `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `code` varchar(16) NOT NULL DEFAULT '',
-  `uid` int(13) unsigned NOT NULL DEFAULT '0',
-  `service-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `service-type-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `quotes` int(8) unsigned NOT NULL DEFAULT '0',
-  `licenses` int(8) unsigned NOT NULL DEFAULT '0',
-  `sightings` int(8) unsigned NOT NULL DEFAULT '0',
-  `signings` int(8) unsigned NOT NULL DEFAULT '0',
+  `prefix` varchar(64) NOT NULL DEFAULT '',
+  `firstname` varchar(128) NOT NULL DEFAULT '',
+  `middlename` varchar(128) NOT NULL DEFAULT '',
+  `surname` varchar(128) NOT NULL DEFAULT '',
+  `suffix` varchar(32) NOT NULL DEFAULT '',
+  `gender` enum('male','female','other') NOT NULL DEFAULT 'other',
+  `dob` int(13) unsigned NOT NULL DEFAULT '0',
+  `general-address-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `work-address-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `home-address-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `general-phone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `mobile-phone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `work-phone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `home-phone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `general-email-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `work-email-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `home-email-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `timezone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `quanity` int(8) unsigned NOT NULL DEFAULT '0',
   `created` int(13) unsigned NOT NULL DEFAULT '0',
-  `accessed` int(13) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `codes`
+-- Dumping data for table `individuals`
 --
 
-LOCK TABLES `codes` WRITE;
-/*!40000 ALTER TABLE `codes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `codes` ENABLE KEYS */;
+LOCK TABLES `individuals` WRITE;
+/*!40000 ALTER TABLE `individuals` DISABLE KEYS */;
+/*!40000 ALTER TABLE `individuals` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

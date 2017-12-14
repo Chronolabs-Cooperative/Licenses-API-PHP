@@ -16,35 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `signing_addresses`
+-- Table structure for table `names`
 --
 
-DROP TABLE IF EXISTS `signing_addresses`;
+DROP TABLE IF EXISTS `names`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `signing_addresses` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `unit` varchar(10) NOT NULL DEFAULT '',
-  `number` varchar(10) NOT NULL DEFAULT '',
-  `street` varchar(128) NOT NULL DEFAULT '',
-  `suburb` varchar(128) NOT NULL DEFAULT '',
-  `state` varchar(128) NOT NULL DEFAULT '',
-  `country` varchar(128) NOT NULL DEFAULT '',
-  `postcode` varchar(10) NOT NULL DEFAULT '',
-  `typal` enum('home','office','government','facility','educational','other') NOT NULL DEFAULT 'other',
-  `created` int(13) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`unit`,`number`,`street`,`suburb`,`country`,`postcode`,`typal`)
+CREATE TABLE `names` (
+  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `whois-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `hits` int(8) unsigned NOT NULL DEFAULT '0',
+  `created` int(13) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `signing_addresses`
+-- Dumping data for table `names`
 --
 
-LOCK TABLES `signing_addresses` WRITE;
-/*!40000 ALTER TABLE `signing_addresses` DISABLE KEYS */;
-/*!40000 ALTER TABLE `signing_addresses` ENABLE KEYS */;
+LOCK TABLES `names` WRITE;
+/*!40000 ALTER TABLE `names` DISABLE KEYS */;
+/*!40000 ALTER TABLE `names` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:04
+-- Dump completed on 2017-12-14 22:57:17

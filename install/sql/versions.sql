@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `versions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `versions` (
-  `id` mediumint(20) NOT NULL AUTO_INCREMENT,
-  `major` int(4) NOT NULL DEFAULT '1',
-  `minor` int(4) NOT NULL DEFAULT '0',
-  `revision` int(4) NOT NULL DEFAULT '0',
-  `subrevision` int(4) NOT NULL DEFAULT '0',
-  `quotes` int(8) NOT NULL DEFAULT '0',
-  `licenses` int(8) NOT NULL DEFAULT '0',
-  `sightings` int(8) NOT NULL DEFAULT '0',
-  `created` int(12) NOT NULL DEFAULT '0',
+  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `major` int(4) unsigned NOT NULL DEFAULT '1',
+  `minor` int(4) unsigned NOT NULL DEFAULT '0',
+  `revision` int(4) unsigned NOT NULL DEFAULT '0',
+  `subrevision` int(4) unsigned NOT NULL DEFAULT '0',
+  `quotes` int(8) unsigned NOT NULL DEFAULT '0',
+  `licenses` int(8) unsigned NOT NULL DEFAULT '0',
+  `sightings` int(8) unsigned NOT NULL DEFAULT '0',
+  `created` int(12) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -55,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-12 19:23:04
+-- Dump completed on 2017-12-14 22:57:18

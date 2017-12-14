@@ -16,30 +16,41 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `versions_title`
+-- Table structure for table `emails`
 --
 
-DROP TABLE IF EXISTS `versions_title`;
+DROP TABLE IF EXISTS `emails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `versions_title` (
+CREATE TABLE `emails` (
   `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `version-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `title-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `created` int(12) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`version-id`,`title-id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `key` varchar(128) NOT NULL DEFAULT '',
+  `country-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `realm-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `whois-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `netbios-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `timezone-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `typal` enum('individual','home','office','headoffice','diplomatic','government','facility','educational','whois-ipv4','whois-ipv6','whois-realm','other') NOT NULL DEFAULT 'other',
+  `deliver` enum('successful','failures','waiting') NOT NULL DEFAULT 'waiting',
+  `email` varchar(255) NOT NULL DEFAULT '',
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `quanity` int(8) unsigned NOT NULL DEFAULT '0',
+  `ignoring-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
+  `sending` int(13) unsigned NOT NULL DEFAULT '0',
+  `waiting` int(13) unsigned NOT NULL DEFAULT '0',
+  `recieve` int(13) unsigned NOT NULL DEFAULT '0',
+  `created` int(13) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `versions_title`
+-- Dumping data for table `emails`
 --
 
-LOCK TABLES `versions_title` WRITE;
-/*!40000 ALTER TABLE `versions_title` DISABLE KEYS */;
-INSERT INTO `versions_title` VALUES (1,1,1,1513035916),(2,2,2,1513037077),(3,3,2,1513037180),(4,1,3,1513037344),(5,4,4,1513037497),(6,5,5,1513037648),(7,1,5,1513037760),(8,6,5,1513037867),(9,2,6,1513040190),(10,2,7,1513040279),(11,6,8,1513040617),(12,7,8,1513041006);
-/*!40000 ALTER TABLE `versions_title` ENABLE KEYS */;
+LOCK TABLES `emails` WRITE;
+/*!40000 ALTER TABLE `emails` DISABLE KEYS */;
+/*!40000 ALTER TABLE `emails` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +62,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-14 22:57:19
+-- Dump completed on 2017-12-14 22:57:18

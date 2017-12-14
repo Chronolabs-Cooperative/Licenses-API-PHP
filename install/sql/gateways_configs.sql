@@ -16,30 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `versions_title`
+-- Table structure for table `gateways_configs`
 --
 
-DROP TABLE IF EXISTS `versions_title`;
+DROP TABLE IF EXISTS `gateways_configs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `versions_title` (
-  `id` mediumint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `version-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `title-id` mediumint(20) unsigned NOT NULL DEFAULT '0',
-  `created` int(12) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `SEARCH` (`version-id`,`title-id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+CREATE TABLE `gateways_configs` (
+  `id` mediumint(20) NOT NULL,
+  `gateway-id` mediumint(20) NOT NULL DEFAULT '0',
+  `sighting-id` mediumint(20) NOT NULL DEFAULT '0',
+  `name` varchar(128) NOT NULL DEFAULT '',
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `value` tinytext,
+  `default` tinytext,
+  `created` int(13) NOT NULL DEFAULT '0',
+  `updated` int(13) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `versions_title`
+-- Dumping data for table `gateways_configs`
 --
 
-LOCK TABLES `versions_title` WRITE;
-/*!40000 ALTER TABLE `versions_title` DISABLE KEYS */;
-INSERT INTO `versions_title` VALUES (1,1,1,1513035916),(2,2,2,1513037077),(3,3,2,1513037180),(4,1,3,1513037344),(5,4,4,1513037497),(6,5,5,1513037648),(7,1,5,1513037760),(8,6,5,1513037867),(9,2,6,1513040190),(10,2,7,1513040279),(11,6,8,1513040617),(12,7,8,1513041006);
-/*!40000 ALTER TABLE `versions_title` ENABLE KEYS */;
+LOCK TABLES `gateways_configs` WRITE;
+/*!40000 ALTER TABLE `gateways_configs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `gateways_configs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-14 22:57:19
+-- Dump completed on 2017-12-14 22:57:18
