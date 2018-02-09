@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
 --
 -- Host: localhost    Database: licenses-localhost
 -- ------------------------------------------------------
--- Server version	5.7.20-0ubuntu0.17.10.1
+-- Server version	5.7.21-0ubuntu0.17.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -32,7 +32,7 @@ CREATE TABLE `titles` (
   `versions` int(8) unsigned NOT NULL DEFAULT '0',
   `created` int(12) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `titles` (
 
 LOCK TABLES `titles` WRITE;
 /*!40000 ALTER TABLE `titles` DISABLE KEYS */;
+INSERT INTO `titles` VALUES (1,'Chronolabs Coop General Software License',0,1,0,0,0,1518125325),(2,'Chronolabs Coop End User License',0,1,0,0,0,1518125435),(3,'Academic Public License',0,1,0,0,0,1518125589),(4,'General Public License',0,2,0,0,0,1518126105),(5,'Lesser General Public License',0,2,0,0,0,1518126465),(6,'Affero General Public License',0,1,0,0,0,1518126777),(7,'Apache License',0,3,0,0,0,1518127027),(8,'The Artistic License',0,2,0,0,0,1518127505),(9,'Boost Software License',0,1,0,0,0,1518127912),(10,'XFree86 Project Licence',0,0,0,0,0,1518128083),(11,'Creative Common Zero (CC0)',0,0,0,0,0,1518128369),(12,'CeCILL',0,3,0,0,0,1518128819),(13,'Cryptix General License',0,1,0,0,0,1518129407),(14,'The eCos license',0,1,0,0,0,1518129534),(15,'Eiffel Forum License',0,1,0,0,0,1518129647),(16,'Massachusetts Institute of Technology License',0,1,0,0,0,1518130051),(17,'The Independent JPEG Group\'s JPEG software license ',0,1,0,0,0,1518130391),(18,' Intel ACPI Software License Agreement',0,1,0,0,0,1518130504),(19,'Internet Systems Consortium (ISC) License',0,0,0,0,0,1518130623),(20,'Mozilla Public License',0,1,0,0,0,1518130770),(21,'OpenLDAP Public License',0,1,0,0,0,1518130868),(22,'Python License ',0,1,0,0,0,1518130982),(23,'Ruby License',0,1,0,0,0,1518132383),(24,'Standard ML of New Jersey License',0,1,0,0,0,1518132589),(25,'Unicode, Inc. License Agreement for Data Files and Software ',0,0,0,0,0,1518132737),(26,'The Universal Permissive License',0,1,0,0,0,1518132900),(27,'The Unlicense',0,1,0,0,0,1518133016),(28,'VIM License',0,1,0,0,0,1518133105),(29,'W3C Software Notice and License',0,1,0,0,0,1518133229),(30,'Do What the Fuck You Want to Public License',0,1,0,0,0,1518133564),(31,'xFree86 License',0,0,0,0,0,1518133794),(32,'Zlib License',0,1,0,0,0,1518133914),(33,'Creative Commons',0,6,0,0,0,1518134289);
 /*!40000 ALTER TABLE `titles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-14 22:57:18
+-- Dump completed on 2018-02-10  4:37:03

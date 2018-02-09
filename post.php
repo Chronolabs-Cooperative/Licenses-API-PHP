@@ -21,7 +21,7 @@
  */
 
 	require_once __DIR__ . DIRECTORY_SEPARATOR . 'header.php';
-    
+	
 	error_reporting(E_ALL);
 	ini_set('display_errors', true);
 	set_time_limit(3600*36*9*14*28);
@@ -177,6 +177,7 @@
             list($count) = $GLOBALS['APIDB']->fetchRow($GLOBALS['APIDB']->queryF($sql));
             if ($count > 0)
                 $error[] = 'Distribution Version + Framework already is defined and cannot be duplicated!';
+            break;
 	}
 	
 	if (!empty($error))
@@ -189,7 +190,7 @@
 	{
 	    case "license":
 	        
-	        $uploadpath = DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . date('Y') . DIRECTORY_SEPARATOR . date('m') . DIRECTORY_SEPARATOR . date('d') . DIRECTORY_SEPARATOR . date('H-i-s-W');
+	        $uploadpath = DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . date('W') . DIRECTORY_SEPARATOR . date('Y') . DIRECTORY_SEPARATOR . date('m') . DIRECTORY_SEPARATOR . date('d') . DIRECTORY_SEPARATOR . date('Hi');
 	        if (mkdir(constant("API_ROOT_PATH") . $uploadpath, 0777, true))
     	        if (!move_uploaded_file($_FILES['logo']['tmp_name'], constant("API_ROOT_PATH") . $logofile = ($uploadpath . DIRECTORY_SEPARATOR . $_FILES['logo']['name']))) {
     				redirect(API_URL, 9, "<center><h1 style='color:rgb(198,0,0);'>Uploading Error Has Occured</h1><br/><p>Licensing API was unable to recieve and store: <strong>".$_FILES['logo']['name']."</strong>!</p></center>");
@@ -354,7 +355,7 @@
 	                }
 	        } else
 	            $filelogo = '';
-	        
+	            
             $inner['description'] = str_replace("<h1>", "\n<h1>", $inner['description']);
             $inner['description'] = str_replace("<h2>", "\n<h2>", $inner['description']);
             $inner['description'] = str_replace("<h3>", "\n<h3>", $inner['description']);
@@ -376,11 +377,11 @@
             $inner['description'] = strip_tags($inner['description']);
             while(strpos($inner['description'], "\n\n\n"))
                 $inner['description'] = str_replace("\n\n\n", "\n\n", $inner['description']);
-            while(substr($inner['description'], 0, 1) = "\n")
+            while(substr($inner['description'], 0, 1) == "\n")
                 $inner['description'] = substr($inner['description'], 1, strlen($inner['description']) - 1);
-            while(substr($inner['description'], strlen($inner['description']) - 1, 1) = "\n")
+            while(substr($inner['description'], strlen($inner['description']) - 1, 1) == "\n")
                 $inner['description'] = substr($inner['description'], 0, strlen($inner['description']) - 2);
-            $sql = "INSERT INTO `" . $GLOBALS['APIDB']->prefix('sightings') . "` (`key`, `type`, `download-url`, `support-url`, `repo-url`, `callback-url`, `name`, `version`, `framework`, `framework-version`, `description`, `authors`, `logo`, `logo-mimetype`, `created`) VALUES('" . $GLOBALS['APIDB']->escape($inner['key']) . "', '" . $inner['type'] . "',  '" . $inner['download-url'] . "',  '" . $inner['support-url'] . "',  '" . $inner['repo-url'] . "',  '" . $inner['callback-url'] . "', '" . $GLOBALS['APIDB']->escape($inner['name']) . "', '" . $GLOBALS['APIDB']->escape($inner['version']) . "', '" . $GLOBALS['APIDB']->escape($inner['framework']) . "',  '" . $GLOBALS['APIDB']->escape($inner['framework-version']) . "', '" . $GLOBALS['APIDB']->escape($inner['description']) . "', '" . $GLOBALS['APIDB']->escape($inner['authors']) . "',  COMPRESS('" . $GLOBALS['APIDB']->escape(file_get_contents($filelogo)) . "'), '" . $GLOBALS['APIDB']->escape($_FILE['logo']['type']) . "', UNIX_TIMESTAMP())";
+            $sql = "INSERT INTO `" . $GLOBALS['APIDB']->prefix('sightings') . "` (`key`, `type`, `download-url`, `support-url`, `repo-url`, `callback-url`, `name`, `version`, `framework`, `framework-version`, `description`, `authors`, `logo-mimetype`, `created`, `logo`) VALUES('" . $GLOBALS['APIDB']->escape($inner['key']) . "', '" . $inner['type'] . "',  '" . $inner['download-url'] . "',  '" . $inner['support-url'] . "',  '" . $inner['repo-url'] . "',  '" . $inner['callback-url'] . "', '" . $GLOBALS['APIDB']->escape($inner['name']) . "', '" . $GLOBALS['APIDB']->escape($inner['version']) . "', '" . $GLOBALS['APIDB']->escape($inner['framework']) . "',  '" . $GLOBALS['APIDB']->escape($inner['framework-version']) . "', '" . $GLOBALS['APIDB']->escape($inner['description']) . "', '" . $GLOBALS['APIDB']->escape(json_encode($inner['authors'])) . "', '" . $GLOBALS['APIDB']->escape($_FILES['logo']['type']) . "', UNIX_TIMESTAMP(), '" . $GLOBALS['APIDB']->escape(file_get_contents($filelogo)) . "')";
             if (!$GLOBALS['APIDB']->queryF($sql))
                 die("SQL Failed: $sql;");
             $sightingid = $GLOBALS['APIDB']->getInsertId();
@@ -414,5 +415,6 @@
             }
             break;
 	}
-
+	
+?>
 	

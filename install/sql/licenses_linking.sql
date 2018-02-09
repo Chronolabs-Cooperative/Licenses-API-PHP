@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.20, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.21, for Linux (x86_64)
 --
 -- Host: localhost    Database: licenses-localhost
 -- ------------------------------------------------------
--- Server version	5.7.20-0ubuntu0.17.10.1
+-- Server version	5.7.21-0ubuntu0.17.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `licenses_linking` (
   `created` int(12) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `SEARCH` (`parent-id`,`child-id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `licenses_linking` (
 
 LOCK TABLES `licenses_linking` WRITE;
 /*!40000 ALTER TABLE `licenses_linking` DISABLE KEYS */;
-INSERT INTO `licenses_linking` VALUES (1,1,13,1513041113),(2,1,14,1513041201),(3,2,15,1513041314),(4,2,16,1513041408),(5,3,17,1513041508),(6,3,18,1513041604),(7,4,19,1513041740),(8,4,20,1513041838),(9,5,21,1513041990),(10,5,22,1513042066);
+INSERT INTO `licenses_linking` VALUES (1,1,36,1518134407),(2,2,37,1518134520),(3,3,38,1518134628),(4,4,39,1518134739),(5,5,40,1518134841);
 /*!40000 ALTER TABLE `licenses_linking` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-14 22:57:16
+-- Dump completed on 2018-02-10  4:37:01

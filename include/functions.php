@@ -29,14 +29,14 @@ require_once dirname(__DIR__).'/class/xcp/xcp.class.php';
 
 if (!function_exists("getURIData")) {
     
-    /* function getURIData()
+    /* function yonkURIData()
      *
      * 	Get a supporting domain system for the API
      * @author 		Simon Roberts (Chronolabs) simon@labs.coop
      *
      * @return 		float()
      */
-    function getURIData($uri = '', $timeout = 25, $connectout = 25, $post = array(), $headers = array())
+    function yonkURIData($uri = '', $timeout = 25, $connectout = 25, $post = array(), $headers = array())
     {
         if (!function_exists("curl_init"))
         {
@@ -51,7 +51,7 @@ if (!function_exists("getURIData")) {
         else {
             $uploadfile = false;
             foreach($post as $field => $value)
-                if (substr($value , 0, 1) == '@' && !file_exists(substr($value , 1, strlen($value) - 2)))
+                if (substr($value , 0, 1) == '@' && !file_exists(substr($value , 1, strlen($value) - 1)))
                     unset($post[$field]);
                 else 
                     $uploadfile = true;
@@ -459,10 +459,69 @@ if (!function_exists("yonkHTMLForms")) {
                 $form[] = "\t\t</tr>";
                 $form[] = "\t\t<tr>";
                 $form[] = "\t\t\t<td>";
-                $form[] = "\t\t\t\t<label for='authors'>Authors JSON Document:</label>";
+                $form[] = "\t\t\t\t<label for='authors'>Authors Listing Arrays:</label>";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t\t<td colspan='2'>";
-                $form[] = "\t\t\t\t<textarea name='authors' id='authors' cols='44' rows='11'></textarea>&nbsp;&nbsp;";
+                $form[] = "\t\t\t\t<div style='border: 2px dotted #3e3e3e; padding: 7px; margin-top: 11px;'>";
+                $form[] = "\t\t\t\t\t<label for='Authors0Name'>Name:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[0][name]' id='Authors0Name' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors0Email'>Email:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[0][email]' id='Authors0Email' size='13' /><br />";
+                $form[] = "\t\t\t\t\t<label for='Authors0Alias'>Handle/Alias:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[0][alias]' id='Authors0Alias' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors0URL'>URL:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[0][url]' id='Authors0URL' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t</div>";
+                $form[] = "\t\t\t\t<div style='border: 2px dotted #3e3e3e; padding: 7px; margin-top: 11px;'>";
+                $form[] = "\t\t\t\t\t<label for='Authors1Name'>Name:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[1][name]' id='Authors1Name' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors1Email'>Email:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[1][email]' id='Authors1Email' size='13' /><br />";
+                $form[] = "\t\t\t\t\t<label for='Authors1Alias'>Handle/Alias:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[1][alias]' id='Authors1Alias' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors1URL'>URL:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[1][url]' id='Authors1URL' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t</div>";
+                $form[] = "\t\t\t\t<div style='border: 2px dotted #3e3e3e; padding: 7px; margin-top: 11px;'>";
+                $form[] = "\t\t\t\t\t<label for='Authors2Name'>Name:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[2][name]' id='Authors2Name' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors2Email'>Email:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[2][email]' id='Authors2Email' size='13' /><br />";
+                $form[] = "\t\t\t\t\t<label for='Authors2Alias'>Handle/Alias:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[2][alias]' id='Authors2Alias' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors2URL'>URL:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[2][url]' id='Authors2URL' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t</div>";
+                $form[] = "\t\t\t\t<div style='border: 2px dotted #3e3e3e; padding: 7px; margin-top: 11px;'>";
+                $form[] = "\t\t\t\t\t<label for='Authors3Name'>Name:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[3][name]' id='Authors3Name' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors3Email'>Email:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[3][email]' id='Authors3Email' size='13' /><br />";
+                $form[] = "\t\t\t\t\t<label for='Authors3Alias'>Handle/Alias:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[3][alias]' id='Authors3Alias' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors3URL'>URL:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[3][url]' id='Authors3URL' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t</div>";
+                $form[] = "\t\t\t\t<div style='border: 2px dotted #3e3e3e; padding: 7px; margin-top: 11px;'>";
+                $form[] = "\t\t\t\t\t<label for='Authors4Name'>Name:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[4][name]' id='Authors4Name' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors4Email'>Email:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[4][email]' id='Authors4Email' size='13' /><br />";
+                $form[] = "\t\t\t\t\t<label for='Authors4Alias'>Handle/Alias:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[4][alias]' id='Authors4Alias' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors4URL'>URL:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[4][url]' id='Authors4URL' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t</div>";
+                $form[] = "\t\t\t\t<div style='border: 2px dotted #3e3e3e; padding: 7px; margin-top: 11px;'>";
+                $form[] = "\t\t\t\t\t<label for='Authors5Name'>Name:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[5][name]' id='Authors5Name' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors5Email'>Email:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[5][email]' id='Authors5Email' size='13' /><br />";
+                $form[] = "\t\t\t\t\t<label for='Authors5Alias'>Handle/Alias:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[5][alias]' id='Authors5Alias' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t\t<label for='Authors5URL'>URL:&nbsp;</label>";
+                $form[] = "\t\t\t\t\t<input type='textbox' name='authors[5][url]' id='Authors5URL' size='13' />&nbsp;";
+                $form[] = "\t\t\t\t</div>";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t</tr>";
                 $form[] = "\t\t<tr>";
@@ -787,6 +846,337 @@ if (!function_exists('yonkLicensingCode'))
         return strtoupper($prefix."-".$version.(strlen($postfix)>0?"-".$postfix:""));
 }
 }
+
+
+/**
+ * validateMD5()
+ * Validates an MD5 Checksum
+ *
+ * @param string $email
+ * @return boolean
+ */
+function validateMD5($md5) {
+    if(preg_match("/^[a-f0-9]{32}$/i", $md5)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * validateEmail()
+ * Validates an Email Address
+ *
+ * @param string $email
+ * @return boolean
+ */
+function validateEmail($email) {
+    if(preg_match("^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.([0-9]{1,3})|([a-zA-Z]{2,3})|(aero|coop|info|mobi|asia|museum|name))$", $email)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * validateDomain()
+ * Validates a Domain Name
+ *
+ * @param string $domain
+ * @return boolean
+ */
+function validateDomain($domain) {
+    if(!preg_match("/^([-a-z0-9]{2,100})\.([a-z\.]{2,8})$/i", $domain)) {
+        return false;
+    }
+    return $domain;
+}
+
+/**
+ * validateIPv4()
+ * Validates and IPv6 Address
+ *
+ * @param string $ip
+ * @return boolean
+ */
+function validateIPv4($ip) {
+    if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_RES_RANGE) === FALSE) // returns IP is valid
+    {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**
+ * validateIPv6()
+ * Validates and IPv6 Address
+ *
+ * @param string $ip
+ * @return boolean
+ */
+function validateIPv6($ip) {
+    if(filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) === FALSE) // returns IP is valid
+    {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function yonkhostbyname6($host, $try_a = false) {
+    // get AAAA record for $host
+    // if $try_a is true, if AAAA fails, it tries for A
+    // the first match found is returned
+    // otherwise returns false
+    
+    $dns = gethostbynamel6($host, $try_a);
+    if ($dns == false) { return false; }
+    else { return $dns[0]; }
+}
+
+function yonkhostbynamel6($host, $try_a = false) {
+    // get AAAA records for $host,
+    // if $try_a is true, if AAAA fails, it tries for A
+    // results are returned in an array of ips found matching type
+    // otherwise returns false
+    
+    $dns6 = dns_get_record($host, DNS_AAAA);
+    if ($try_a == true) {
+        $dns4 = dns_get_record($host, DNS_A);
+        $dns = array_merge($dns4, $dns6);
+    }
+    else { $dns = $dns6; }
+    $ip6 = array();
+    $ip4 = array();
+    foreach ($dns as $record) {
+        if ($record["type"] == "A") {
+            $ip4[] = $record["ip"];
+        }
+        if ($record["type"] == "AAAA") {
+            $ip6[] = $record["ipv6"];
+        }
+    }
+    if (count($ip6) < 1) {
+        if ($try_a == true) {
+            if (count($ip4) < 1) {
+                return false;
+            }
+            else {
+                return $ip4;
+            }
+        }
+        else {
+            return false;
+        }
+    }
+    else {
+        return $ip6;
+    }
+}
+
+
+if (!function_exists("yonkBaseRealm")) {
+    /**
+     * Gets the base domain of a tld with subdomains, that is the root domain header for the network rout
+     *
+     * @param string $url
+     *
+     * @return string
+     */
+    function yonkBaseRealm($realm = '')
+    {       
+        
+        if (!validateDomain($realm))
+            return false;
+            
+        static $fallout, $classes;
+        
+        if (empty($classes))
+            if (!$classes = APICache::read('internet-strata-classes'))
+            {
+                $classes = array_keys(json_decode(getURIData(API_STRATA_API_URL ."/v2/strata/json.api", 15, 10), true));
+                APICache::write('internet-strata-classes', $classes, 3600 * 72);
+            }
+        if (empty($fallout))
+            if (!$fallout = APICache::read('internet-strata-fallout'))
+            {
+                $fallout = array_keys(json_decode(getURIData(API_STRATA_API_URL ."/v2/fallout/json.api", 15, 10), true));
+                APICache::write('internet-strata-fallout', $fallout, 3600 * 72);
+            }
+            
+        // Get Full Hostname
+        if (!filter_var($realm, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 || FILTER_FLAG_IPV4) === false)
+            return $realm;
+        
+        // break up domain, reverse
+        $elements = explode('.', $realm);
+        $elements = array_reverse($elements);
+                
+        // Returns Base Domain
+        if (in_array($elements[0], $classes))
+            return $elements[1] . '.' . $elements[0];
+        elseif (in_array($elements[0], $fallout) && in_array($elements[1], $classes))
+            return $elements[2] . '.' . $elements[1] . '.' . $elements[0];
+        elseif (in_array($elements[0], $fallout))
+            return  $elements[1] . '.' . $elements[0];
+        else
+            return  $elements[1] . '.' . $elements[0];
+        
+        return parse_url($uri, PHP_URL_HOST);
+    }
+}
+
+if (!function_exists("getURLId")) {
+    /**
+     * Redirect HTML Display
+     *
+     * @param string $uri
+     * @param integer $seconds
+     * @param string $message
+     *
+     */
+    function yonkURLId($url = '')
+    {
+        $sql = "SELECT `id` FROM `" . $GLOBALS['APIDB']->prefix('urls') . "` WHERE `url` LIKE '" . $GLOBALS['APIDB']->escape($url) . "'";
+        list($id) = $GLOBALS['APIDB']->fetchRow($GLOBALS['APIDB']->queryF($sql));
+        if ($id<>0) {
+            $sql = "UPDATE `" . $GLOBALS['APIDB']->prefix('urls') . "` SET `hits` = `hits` + 1 WHERE `id` = '$id'";
+            $GLOBALS['APIDB']->queryF($sql);
+            return $id;
+        }
+        
+        $sql = "INSERT INTO `" . $GLOBALS['APIDB']->prefix('urls') . "` (`url`, `netbios-id`, `realm-id`, `hits`, `created`) VALUES('" . $GLOBALS['APIDB']->escape($url) . "', '" . yonkNetBiosId(parse_url($url, PHP_URL_HOST)) . "', '" . yonkRealmId(getBaseDomain(parse_url($url, PHP_URL_HOST))) . "', 1, UNIX_TIMESTAMP())";
+        if (!$GLOBALS['APIDB']->queryF($sql))
+            die("SQL Failed: $sql;");
+        return $GLOBALS['APIDB']->getInsertId();
+    }
+}
+
+
+if (!function_exists("getNetBiosId")) {
+    /**
+     * Redirect HTML Display
+     *
+     * @param string $uri
+     * @param integer $seconds
+     * @param string $message
+     *
+     */
+    function yonkNetBiosId($netbios = '')
+    {
+        if (!validateDomain($netbios))
+            return false;
+        
+        $sql = "SELECT `id` FROM `" . $GLOBALS['APIDB']->prefix('netbios') . "` WHERE `netbios` LIKE '" . $GLOBALS['APIDB']->escape($netbios) . "'";
+        list($id) = $GLOBALS['APIDB']->fetchRow($GLOBALS['APIDB']->queryF($sql));
+        if ($id<>0) {
+            $sql = "UPDATE `" . $GLOBALS['APIDB']->prefix('netbios') . "` SET `hits` = `hits` + 1 WHERE `id` = '$id'";
+            $GLOBALS['APIDB']->queryF($sql);
+            return $id;
+        }
+        
+        $ipv4 = gethostbyname($netbios);
+        $ipv6 = gethostbyname6($netbios, false);
+        
+        $sql = "INSERT INTO `" . $GLOBALS['APIDB']->prefix('netbios') . "` (`netbios`, `ipv4-id`, `ipv6-id`, `realm-id`, `hits`, `created`) VALUES('" . $GLOBALS['APIDB']->escape($netbios) . "', '" . yonkIPv4Id($ipv4) . "', '" . yonkIPv6Id($ipv4) . "', '" . yonkRealmId(getBaseDomain($netbios)) . "', 1, UNIX_TIMESTAMP())";
+        if (!$GLOBALS['APIDB']->queryF($sql))
+            die("SQL Failed: $sql;");
+        return $GLOBALS['APIDB']->getInsertId();
+    }
+}
+
+if (!function_exists("yonkRealmId")) {
+    /**
+     * Redirect HTML Display
+     *
+     * @param string $uri
+     * @param integer $seconds
+     * @param string $message
+     *
+     */
+    function yonkRealmId($realm = '')
+    {
+        if (!validateDomain($realm))
+            return false;
+            
+        $sql = "SELECT `id` FROM `" . $GLOBALS['APIDB']->prefix('realms') . "` WHERE `realm` LIKE '" . $GLOBALS['APIDB']->escape($realm) . "'";
+        list($id) = $GLOBALS['APIDB']->fetchRow($GLOBALS['APIDB']->queryF($sql));
+        if ($id<>0) {
+            $sql = "UPDATE `" . $GLOBALS['APIDB']->prefix('realms') . "` SET `hits` = `hits` + 1 WHERE `id` = '$id'";
+            $GLOBALS['APIDB']->queryF($sql);
+            return $id;
+        }
+        
+        $ipv4 = gethostbyname($realm);
+        $ipv6 = gethostbyname6($realm, false);
+        
+        $sql = "INSERT INTO `" . $GLOBALS['APIDB']->prefix('realms') . "` (`realm`, `ipv4-id`, `ipv6-id`, `realm-whois-id`, `ipv4-whois-id`, `ipv6-whois-id`, `hits`, `created`) VALUES('" . $GLOBALS['APIDB']->escape($realm) . "', '" . yonkIPv4Id($ipv4) . "', '" . yonkIPv6Id($ipv4) . "', '" . yonkWhoISId($realm) . "', '" . yonkWhoISId($ipv4) . "', '" . yonkWhoISId($ipv6) . "', 1, UNIX_TIMESTAMP())";
+        if (!$GLOBALS['APIDB']->queryF($sql))
+            die("SQL Failed: $sql;");
+        return $GLOBALS['APIDB']->getInsertId();
+    }
+}
+
+if (!function_exists("yonkIPv4Id")) {
+    /**
+     * Redirect HTML Display
+     *
+     * @param string $uri
+     * @param integer $seconds
+     * @param string $message
+     *
+     */
+    function yonkIPv4Id($ipv4 = '')
+    {
+        if (!validateIPv4($ipv4))
+            return false;
+            
+        $sql = "SELECT `id` FROM `" . $GLOBALS['APIDB']->prefix('ipv4') . "` WHERE `ipv4` LIKE '" . $GLOBALS['APIDB']->escape($ipv4) . "'";
+        list($id) = $GLOBALS['APIDB']->fetchRow($GLOBALS['APIDB']->queryF($sql));
+        if ($id<>0) {
+            $sql = "UPDATE `" . $GLOBALS['APIDB']->prefix('ipv4') . "` SET `hits` = `hits` + 1 WHERE `id` = '$id'";
+            $GLOBALS['APIDB']->queryF($sql);
+            return $id;
+        }
+                    
+        $sql = "INSERT INTO `" . $GLOBALS['APIDB']->prefix('ipv4') . "` (`ipv4`, `whois-id`, `hits`, `created`) VALUES('" . $GLOBALS['APIDB']->escape($ipv4) . "', '" . yonkWhoISId($ipv4) . "', 1, UNIX_TIMESTAMP())";
+        if (!$GLOBALS['APIDB']->queryF($sql))
+            die("SQL Failed: $sql;");
+        return $GLOBALS['APIDB']->getInsertId();
+    }
+}
+
+
+if (!function_exists("yonkIPv6Id")) {
+    /**
+     * Redirect HTML Display
+     *
+     * @param string $uri
+     * @param integer $seconds
+     * @param string $message
+     *
+     */
+    function yonkIPv6Id($ipv6 = '')
+    {
+        if (!validateIPv6($ipv6))
+            return false;
+        
+        $sql = "SELECT `id` FROM `" . $GLOBALS['APIDB']->prefix('ipv6') . "` WHERE `ipv6` LIKE '" . $GLOBALS['APIDB']->escape($ipv6) . "'";
+        list($id) = $GLOBALS['APIDB']->fetchRow($GLOBALS['APIDB']->queryF($sql));
+        if ($id<>0) {
+            $sql = "UPDATE `" . $GLOBALS['APIDB']->prefix('ipv6') . "` SET `hits` = `hits` + 1 WHERE `id` = '$id'";
+            $GLOBALS['APIDB']->queryF($sql);
+            return $id;
+        }
+        
+        $sql = "INSERT INTO `" . $GLOBALS['APIDB']->prefix('ipv6') . "` (`ipv6`, `whois-id`, `hits`, `created`) VALUES('" . $GLOBALS['APIDB']->escape($ipv6) . "', '" . yonkWhoISId($ipv6) . "', 1, UNIX_TIMESTAMP())";
+        if (!$GLOBALS['APIDB']->queryF($sql))
+            die("SQL Failed: $sql;");
+        return $GLOBALS['APIDB']->getInsertId();
+    }
+}
+
 
 if (!function_exists("redirect")) {
     /**

@@ -1,9 +1,14 @@
 ## Chronolabs Cooperative presents
+
 # Licensing Repository Services API  - http://licenses.snails.email -
 
 # BASIC INSTALLATION MANUAL
-## by. Simon Antony Roberts (Sydney)
-## simon@snails.email
+
+## by. Dr. Simon Antony Roberts (Sydney) <simon@snails.email>
+
+### Version: Prealpha (Unreleased)
+
+#### Demo: http://licenses.snails.email
 
 # Foreword
 
