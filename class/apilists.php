@@ -15,7 +15,6 @@
  * @since               2.0.0
  */
 
-defined('API_ROOT_PATH') || exit('Restricted access');
 
 if (!defined('API_LISTS_INCLUDED')) {
     define('API_LISTS_INCLUDED', 1);
@@ -31,71 +30,7 @@ if (!defined('API_LISTS_INCLUDED')) {
      */
     class APILists
     {
-        /**
-         * @return array
-         */
-        public static function getTimeZoneList()
-        {
-            api_loadLanguage('timezone');
-
-            $time_zone_list = array(
-                '-12'  => _TZ_GMTM12,
-                '-11'  => _TZ_GMTM11,
-                '-10'  => _TZ_GMTM10,
-                '-9'   => _TZ_GMTM9,
-                '-8'   => _TZ_GMTM8,
-                '-7'   => _TZ_GMTM7,
-                '-6'   => _TZ_GMTM6,
-                '-5'   => _TZ_GMTM5,
-                '-4'   => _TZ_GMTM4,
-                '-3.5' => _TZ_GMTM35,
-                '-3'   => _TZ_GMTM3,
-                '-2'   => _TZ_GMTM2,
-                '-1'   => _TZ_GMTM1,
-                '0'    => _TZ_GMT0,
-                '1'    => _TZ_GMTP1,
-                '2'    => _TZ_GMTP2,
-                '3'    => _TZ_GMTP3,
-                '3.5'  => _TZ_GMTP35,
-                '4'    => _TZ_GMTP4,
-                '4.5'  => _TZ_GMTP45,
-                '5'    => _TZ_GMTP5,
-                '5.5'  => _TZ_GMTP55,
-                '6'    => _TZ_GMTP6,
-                '7'    => _TZ_GMTP7,
-                '8'    => _TZ_GMTP8,
-                '9'    => _TZ_GMTP9,
-                '9.5'  => _TZ_GMTP95,
-                '10'   => _TZ_GMTP10,
-                '11'   => _TZ_GMTP11,
-                '12'   => _TZ_GMTP12);
-
-            return $time_zone_list;
-        }
-
-        /**
-         * gets list of themes folder from themes directory
-         */
-        public static function getThemesList()
-        {
-            return APILists::getDirListAsArray(API_THEME_PATH . '/');
-        }
-
-        /**
-         * gets a list of module folders from the modules directory
-         */
-        public static function getModulesList()
-        {
-            return APILists::getDirListAsArray(API_ROOT_PATH . '/modules/');
-        }
-
-        /**
-         * gets list of editors folder from apieditor directory
-         */
-        public static function getEditorList()
-        {
-            return APILists::getDirListAsArray(API_ROOT_PATH . '/class/apieditor/');
-        }
+        
 
         /**
          * gets list of name of directories inside a directory

@@ -27,16 +27,50 @@ require_once __DIR__.'/common.php';
 require_once dirname(__DIR__).'/class/cache/apicache.php';
 require_once dirname(__DIR__).'/class/xcp/xcp.class.php';
 
-if (!function_exists("getURIData")) {
+if (!function_exists("loadLanguage")) {
     
-    /* function yonkURIData()
+    /* function loadLanguage()
      *
      * 	Get a supporting domain system for the API
      * @author 		Simon Roberts (Chronolabs) simon@labs.coop
      *
      * @return 		float()
      */
-    function yonkURIData($uri = '', $timeout = 25, $connectout = 25, $post = array(), $headers = array())
+    function loadLanguage($resource = '', $default = 'english')
+    {
+        if (in_array("$resource.php", APILists::getFileListAsArray(dirname(__DIR__) . DS . 'language' . DS . API_LANGUAGE)))
+            @include_once dirname(__DIR__) . DS . 'language' . DS . API_LANGUAGE . DS . "$resource.php";
+        elseif (in_array("$resource.php", APILists::getFileListAsArray(dirname(__DIR__) . DS . 'language' . DS . $default)))
+            @include_once dirname(__DIR__) . DS . 'language' . DS . $default . DS . "$resource.php";
+    }
+}
+
+if (!function_exists("api_loadLanguage")) {
+    
+    /* function api_loadLanguage()
+     *api_
+     * 	Get a supporting domain system for the API
+     * @author 		Simon Roberts (Chronolabs) simon@labs.coop
+     *
+     * @return 		float()
+     */
+    function api_loadLanguage($resource = '', $default = 'english')
+    {
+        @loadLanguage($resource, $default);
+    }
+}
+
+
+if (!function_exists("getURIData")) {
+    
+    /* function getURIData()
+     *
+     * 	Get a supporting domain system for the API
+     * @author 		Simon Roberts (Chronolabs) simon@labs.coop
+     *
+     * @return 		float()
+     */
+    function getURIData($uri = '', $timeout = 25, $connectout = 25, $post = array(), $headers = array())
     {
         if (!function_exists("curl_init"))
         {
@@ -100,14 +134,7 @@ if (!function_exists("yonkCountries")) {
         if (count($_countries) < 10)
         if (count($_countries == APICache::read('countries')) < 10)
         {
-            $countries = explode("\n", file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'countries.diz'));
-            $json = array();
-            while(count($countries)<10 && count($json)<10)
-            {
-                shuffle($countries);
-                $json = json_decode(getURIData($countries[0], 35, 50), true);
-                unset($countries[0]);
-            }
+            $json = json_decode(getURIData(API_PLACES_API_URL.'/v3/list/list/json.api', 35, 50), true);
             $GLOBALS['APIDB']->queryF('START TRANSACTION');
             if (!empty($json))
             {
@@ -357,10 +384,18 @@ if (!function_exists("yonkHTMLForms")) {
                 $form[] = "\t<table class='sighting-creator' id='sighting-creator' style='vertical-align: top !important; min-width: 98%;'>";
                 $form[] = "\t\t<tr>";
                 $form[] = "\t\t\t<td style='width: 320px;'>";
-                $form[] = "\t\t\t\t<label for='key'>Distribution Identity Key:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
+                $form[] = "\t\t\t\t<label for='key'>Distribution Version Identity Key:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t\t<td colspan='2'>";
-                $form[] = "\t\t\t\t<input type='textbox' name='key' id='key' maxlen='44' size='41' value='".$key."' />&nbsp;&nbsp;";
+                $form[] = "\t\t\t\t<input type='textbox' name='key' id='key' maxlen='44' size='128' value='".$key."' />&nbsp;&nbsp;";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t\t<td style='width: 320px;'>";
+                $form[] = "\t\t\t\t<label for='typal'>Collaborative Package Type Serial/Key:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t\t<td colspan='2'>";
+                $form[] = "\t\t\t\t<input type='textbox' name='typal' id='typal' maxlen='44' size='128' value='' />&nbsp;&nbsp;";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t</tr>";
                 $form[] = "\t\t<tr>";
@@ -383,6 +418,15 @@ if (!function_exists("yonkHTMLForms")) {
                 $form[] = "\t\t\t\t\t<option value='artwork'>Artwork(s)</option>";
                 $form[] = "\t\t\t\t\t<option value='other' selected='selected'>Other Artifact</option>";
                 $form[] = "\t\t\t\t</select>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t\t<td style='width: 320px;'>";
+                $form[] = "\t\t\t\t<label>License Serialisation Generational Base:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t\t<td colspan='2'>";
+                $form[] = "\t\t\t\t<label for='segments'>Key Segments/Sections:&nbsp;</label><input type='textbox' name='segments' id='segments' maxlen='1' size='3' />&nbsp;&nbsp;";
+                $form[] = "\t\t\t\t<label for='lengths'>Segment Character Length:&nbsp;</label><input type='textbox' name='lengths' id='lengths' maxlen='2' size='3' />&nbsp;&nbsp;";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t</tr>";
                 $form[] = "\t\t<tr>";
@@ -415,6 +459,22 @@ if (!function_exists("yonkHTMLForms")) {
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t\t<td colspan='2'>";
                 $form[] = "\t\t\t\t<input type='textbox' name='callback-url' id='callback-url' maxlen='250' size='41' />&nbsp;&nbsp;";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t\t<td style='width: 320px;'>";
+                $form[] = "\t\t\t\t<label for='bugs-url'>Bug Report Callback URL:</label>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t\t<td colspan='2'>";
+                $form[] = "\t\t\t\t<input type='textbox' name='bugs-url' id='bugs-url' maxlen='250' size='41' />&nbsp;&nbsp;";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t\t<td style='width: 320px;'>";
+                $form[] = "\t\t\t\t<label for='request-url'>Feedback/Request Feature Callback URL:</label>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t\t<td colspan='2'>";
+                $form[] = "\t\t\t\t<input type='textbox' name='request-url' id='request-url' maxlen='250' size='41' />&nbsp;&nbsp;";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t</tr>";
                 $form[] = "\t\t<tr>";
@@ -455,6 +515,17 @@ if (!function_exists("yonkHTMLForms")) {
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t\t<td colspan='2'>";
                 $form[] = "\t\t\t\t<textarea name='description' id='description' cols='44' rows='11'></textarea>&nbsp;&nbsp;";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t\t<td colspan='3'>";
+                $form[] = "\t\t\t\t<label for='logo'>Version/Package Distribution logo:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
+                $form[] = "\t\t\t\t<input type='file' name='logo' id='logo'><br/>";
+                $form[] = "\t\t\t\t<div style='margin-left:42px; font-size: 71.99%; margin-top: 7px; padding: 11px;'>";
+                $form[] = "\t\t\t\t\t ~~ <strong>Maximum Upload Size Is: <em style='color:rgb(255,100,123); font-weight: bold; font-size: 132.6502%;'>" . ini_get('upload_max_filesize') . "!!!</em></strong><br/>";
+                $formats = file(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'logo-supported.diz'); sort($formats);
+                $form[] = "\t\t\t\t\t ~~ <strong>Image Formats Supported: <em style='color:rgb(15,70 43); font-weight: bold; font-size: 81.6502%;'>*." . str_replace("\n" , "", implode(" *.", array_unique($formats))) . "</em></strong>!<br/>";
+                $form[] = "\t\t\t\t</div>";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t</tr>";
                 $form[] = "\t\t<tr>";
@@ -525,19 +596,8 @@ if (!function_exists("yonkHTMLForms")) {
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t</tr>";
                 $form[] = "\t\t<tr>";
-                $form[] = "\t\t\t<td colspan='3'>";
-                $form[] = "\t\t\t\t<label for='logo'>Distribution logo:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
-                $form[] = "\t\t\t\t<input type='file' name='logo' id='logo'><br/>";
-                $form[] = "\t\t\t\t<div style='margin-left:42px; font-size: 71.99%; margin-top: 7px; padding: 11px;'>";
-                $form[] = "\t\t\t\t\t ~~ <strong>Maximum Upload Size Is: <em style='color:rgb(255,100,123); font-weight: bold; font-size: 132.6502%;'>" . ini_get('upload_max_filesize') . "!!!</em></strong><br/>";
-                $formats = file(__DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'logo-supported.diz'); sort($formats);
-                $form[] = "\t\t\t\t\t ~~ <strong>Image Formats Supported: <em style='color:rgb(15,70 43); font-weight: bold; font-size: 81.6502%;'>*." . str_replace("\n" , "", implode(" *.", array_unique($formats))) . "</em></strong>!<br/>";
-                $form[] = "\t\t\t\t</div>";
-                $form[] = "\t\t\t</td>";
-                $form[] = "\t\t</tr>";
-                $form[] = "\t\t<tr>";
                 $form[] = "\t\t\t<td>";
-                $form[] = "\t\t\t\t<label for='licenses'>Licensing Bundled with Distribution:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
+                $form[] = "\t\t\t\t<label for='licenses'>Licensing with Distribution Package:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t\t<td colspan='2'>";
                 $form[] = "\t\t\t\t<select name='licenses[]' id='licenses' multiple size='16' >";
@@ -546,6 +606,53 @@ if (!function_exists("yonkHTMLForms")) {
                 $form[] = "\t\t\t\t</select>";
                 $form[] = "\t\t\t</td>";
                 $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t\t<td style='width: 320px;'>";
+                $form[] = "\t\t\t\t<label for='gateway'>Payment Gateway Required:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t\t<td colspan='2'>";
+                $form[] = "\t\t\t\t<select name='gateway' id='gateway'>";
+                $form[] = "\t\t\t\t\t<option value='Yes Required'>Yes Required</option>";
+                $form[] = "\t\t\t\t\t<option value='Not Required' selected='selected'>Not Required</option>";
+                $form[] = "\t\t\t\t\t<option value='Donation Required'>Donation Required</option>";
+                $form[] = "\t\t\t\t\t<option value='Donation Prompted'>Donation Prompted</option>";
+                $form[] = "\t\t\t\t</select>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t\t<td style='width: 320px;'>";
+                $form[] = "\t\t\t\t<label>Payment Amount + Currency:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t\t<td colspan='2'>";
+                $form[] = "\t\t\t\t<label for='gateway-amount'>Amount:&nbsp;</label><input type='textbox' name='gateway-amount' id='gateway-amount' maxlen='20' size='15' />&nbsp;&nbsp;";
+                $form[] = "\t\t\t\t<label for='gateway-currency'>Currency:&nbsp;</label><select name='gateway-currency' id='gateway-currency'>";
+                $currency = array();
+                foreach(yonkCountries() as $key => $country)
+                    if (!empty($country['currency']))
+                        $currency[$country['currency']] = $country['currency'];
+                sort($currency);
+                foreach($currency as $key => $currency)
+                    $form[] = "\t\t\t\t\t<option value='".$currency."'".($currency=='USD'?" selected='selected'":"").">".$currency."</option>";
+                $form[] = "\t\t\t\t</select>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t<tr>";
+                $form[] = "\t\t\t<td style='width: 320px;'>";
+                $form[] = "\t\t\t\t<label for='gateway-id'>Payment Gateway in Use:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t\t<td colspan='2'>";
+                $form[] = "\t\t\t\t<select name='gateway-id' id='gateway-id'>";
+                $form[] = "\t\t\t\t\t<option value='Yes Required'>Yes Required</option>";
+                $form[] = "\t\t\t\t\t<option value='Not Required' selected='selected'>Not Required</option>";
+                $form[] = "\t\t\t\t\t<option value='Donation Required'>Donation Required</option>";
+                $form[] = "\t\t\t\t\t<option value='Donation Prompted'>Donation Prompted</option>";
+                $form[] = "\t\t\t\t</select>";
+                $form[] = "\t\t\t</td>";
+                $form[] = "\t\t</tr>";
+                $form[] = "\t\t<tr>";
+                
+                
                 $form[] = "\t\t<tr>";
                 $form[] = "\t\t\t<td>";
                 $form[] = "\t\t\t\t<label for='type'>Licencing File(s) Format:&nbsp;<font style='color: rgb(250,0,0); font-size: 139%; font-weight: bold'>*</font></label>";

@@ -28,6 +28,7 @@ CREATE TABLE `gateways` (
   `dirname` varchar(45) NOT NULL DEFAULT '',
   `enabled` enum('Yes','No') NOT NULL DEFAULT 'Yes',
   `author` varchar(128) NOT NULL DEFAULT '',
+  `description` tinytext,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

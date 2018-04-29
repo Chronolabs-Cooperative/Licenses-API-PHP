@@ -20,7 +20,8 @@
  * @link				http://cipher.labs.coop
  */
 
-	
+loadLanguage('help');
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,7 +33,7 @@
 <meta property="og:site_name" content="<?php echo API_VERSION; ?> - <?php echo API_LICENSE_COMPANY; ?>"/>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="rating" content="general" />
-<meta http-equiv="author" content="wishcraft@users.sourceforge.net" />
+<meta http-equiv="author" content="chronolabscoop@users.sourceforge.net" />
 <meta http-equiv="copyright" content="<?php echo API_LICENSE_COMPANY; ?> &copy; <?php echo date("Y"); ?>" />
 <meta http-equiv="generator" content="Chronolabs Cooperative (<?php echo $place['iso3']; ?>)" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -49,10 +50,10 @@
 	}, 
 	'follow' : {
 	  'services' : [
-		{'service': 'facebook', 'id': 'Chronolabs'},
-		{'service': 'twitter', 'id': 'JohnRingwould'},
+		{'service': 'facebook', 'id': 'ChronolabsCoop'},
+		{'service': 'twitter', 'id': 'SimonXaies'},
 		{'service': 'twitter', 'id': 'ChronolabsCoop'},
-		{'service': 'twitter', 'id': 'Cipherhouse'},
+		{'service': 'twitter', 'id': 'TiesaaDroids'},
 		{'service': 'twitter', 'id': 'OpenRend'},
 	  ]
 	},  
@@ -86,28 +87,28 @@
 <div class="main">
 	<img style="float: right; margin: 11px; width: auto; height: auto; clear: none;" src="<?php echo API_URL; ?>/assets/images/logo_350x350.png" />
     <h1><?php echo API_VERSION; ?> -- <?php echo API_LICENSE_COMPANY; ?></h1>
-    <p style="text-align: justify; font-size: 169.2356897%; font-weight: 400">This API provisions licensing for software or media, and also quotes sightings to licensing being used!</p>
-    <h2>Code API Documentation</h2>
-    <p>You can find the phpDocumentor code API documentation at the following path :: <a href="<?php echo API_URL; ?>/docs/" target="_blank"><?php echo API_URL; ?>/docs/</a>. These should outline the source code core functions and classes for the API to function!</p>   
-    <h2>Forms with the post.api extension</h2>
-    <p>This form is used for creating a new license in the database with the licensing repository</p>
+    <p style="text-align: justify; font-size: 169.2356897%; font-weight: 400"><?php echo API_HELP_P1; ?></p>
+    <h2><?php echo API_HELP_H21; ?></h2>
+    <p><?php echo str_replace('%url', API_URL . '/docs/', API_HELP_P2); ?></p>   
+    <h2><?php echo API_HELP_H22; ?></h2>
+    <p><?php echo API_HELP_P3; ?></p>
     <blockquote>
     	<?php echo $form = yonkHTMLForms('license'); ?>
-    	<h3>This is the api example form HTML Code</h3>
+    	<h3><?php echo API_HELP_BH3; ?></h3>
     	<pre style="overflow: scroll; height: 320px;">
     		<?php echo htmlspecialchars($form); ?>
     	</pre>
     </blockquote>
-    <p>This form is used for creating a new distribution licensing sightings for licence signing</p>
+    <p><?php echo API_HELP_P4 ?></p>
     <blockquote>
     	<?php echo $form = yonkHTMLForms('sighting'); ?>
-    	<h3>This is the api example form HTML Code</h3>
+    	<h3><?php echo API_HELP_BH3; ?></h3>
     	<pre style="overflow: scroll; height: 320px;">
     		<?php echo htmlspecialchars($form); ?>
     	</pre>
     </blockquote>
-    <h2>The Author</h2>
-    <p>This was developed by Simon Roberts in 2013 and is part of the Chronolabs System and api's.<br/><br/>This is open source which you can download from <a href="https://sourceforge.net/projects/chronolabsapis/">https://sourceforge.net/projects/chronolabsapis/</a> contact the scribe  <a href="mailto:wishcraft@users.sourceforge.net">wishcraft@users.sourceforge.net</a></p></body>
+    <h2><?php echo API_HELP_FH2; ?></h2>
+    <p><?php echo API_HELP_FP1; ?></p></body>
 </div>
 </html>
 <?php 

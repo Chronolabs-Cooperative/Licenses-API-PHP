@@ -15,6 +15,16 @@
 // _LANGCODE: en
 // _CHARSET : UTF-8
 // Translator: API Translation Team
+define('API_PLACES_API_URL_LABEL', 'GeoSpatial Locations + Places REST API (see: <a href="https://github.com/Chronolabs-Cooperative/Places-API-PHP" target="_blank">github.com</a>)');
+define('API_PLACES_API_URL_HELP', 'GeoSpatial Locations + Places REST API (see: <a href="https://github.com/Chronolabs-Cooperative/Places-API-PHP" target="_blank">github.com</a>)');
+define('API_LOOKUPS_API_URL_LABEL', 'IP Lookups API (see: <a href="https://github.com/Chronolabs-Cooperative/Lookups-API-PHP" target="_blank">github.com</a>)');
+define('API_LOOKUPS_API_URL_HELP', 'IP Lookups API (see: <a href="https://github.com/Chronolabs-Cooperative/Lookups-API-PHP" target="_blank">github.com</a>)');
+define('API_STRATA_API_URL_LABEL', 'Domain/Realms Strata+Fallouts API (see: <a href="https://github.com/Chronolabs-Cooperative/Strata-API-PHP" target="_blank">github.com</a>)');
+define('API_STRATA_API_URL_HELP', 'Domain/Realms Strata+Fallouts API (see: <a href="https://github.com/Chronolabs-Cooperative/Strata-API-PHP" target="_blank">github.com</a>)');
+define('API_WHOIS_API_URL_LABEL', 'IP+Domain WhoIS API (see: <a href="https://github.com/Chronolabs-Cooperative/WhoIS-API-PHP" target="_blank">github.com</a>)');
+define('API_WHOIS_API_URL_HELP', 'IP+Domain WhoIS API (see: <a href="https://github.com/Chronolabs-Cooperative/WhoIS-API-PHP" target="_blank">github.com</a>)');
+define('PATHS_EXTRAS', 'Extra Settings');
+define('PATHS_EXTRAS_TITLE', 'Extra Configurations + Keys');
 define('SHOW_HIDE_HELP', 'Show/hide help text');
 // License
 define('LICENSE_NOT_WRITEABLE', 'License file "%s" is NOT writable!');
@@ -114,7 +124,7 @@ define('API_TABLES_CREATED', 'API system tables have been created.');
 //define('READY_SAVE_MAINFILE', 'The installer is now ready to save the specified settings to <em>mainfile.php</em>.');
 define('SAVED_MAINFILE', 'Settings saved');
 define('SAVED_MAINFILE_MSG', 'The installer has saved the specified settings to <em>mainfile.php</em> and <em>secure.php</em>.');
-define('TMP_ALREADY_INSERTED', 'API tmp found in tmpbase.');
+define('TMP_ALREADY_INSERTED', 'API tables found in database.');
 define('TMP_INSERTED', 'Initial tmp has been inserted into tmpbase.');
 // %s is tmpbase name
 define('DATABASE_CREATED', 'Database %s created!'); // L43

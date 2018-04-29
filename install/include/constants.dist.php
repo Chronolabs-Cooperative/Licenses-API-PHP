@@ -13,7 +13,9 @@
  * @license             GNU GPL 2 (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
-
+// Default Language Settings
+if (!defined('API_LANGUAGE'))
+    define('API_LANGUAGE','english');
 
 // API URL's for Functions
 define('API_WHOIS_URL', '');

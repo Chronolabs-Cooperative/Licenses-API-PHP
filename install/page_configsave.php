@@ -28,6 +28,7 @@
 
 require_once './include/common.inc.php';
 require_once './include/functions.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'include' . DIRECTORY_SEPARATOR . 'functions.php';
 
 defined('API_INSTALL') || die('API Installation wizard die');
 
@@ -56,7 +57,8 @@ if (true === $writeCheck) {
         'GROUP_USERS' => 2,
         'GROUP_ANONYMOUS' => 3);
     $rewrite = array_merge($rewrite, $vars);
-
+    error_reporting(E_ALL);
+    ini_set('display_errors', true);
     $result = writeConfigurationFile($rewrite, $vars['ROOT_PATH'] . '/include', 'dbconfig.dist.php', 'dbconfig.php');
     $GLOBALS['error'] = !($result === true);
     if ($result === true) {
@@ -64,7 +66,22 @@ if (true === $writeCheck) {
         $GLOBALS['error'] = !($result === true);
     }
 
+    $constants = file(__DIR__ . DIRECTORY_SEPARATOR . 'include' . DIRECTORY_SEPARATOR . 'constants.dist.php');
+    foreach($constants as $line => $code)
+    {
+        foreach($_SESSION['extras'] as $key => $values)
+        {
+            if (is_array($values)) {
+                foreach($values as $field => $value)
+                    if (strpos($code, "API_".strtoupper($key)."_".strtoupper($field)))
+                        $constants[$line] = "define('API_".strtoupper($key)."_".strtoupper($field)."','$value');\n";
+            } elseif (strpos($code, "API_".strtoupper($key)))
+            $constants[$line] = "define('API_".strtoupper($key)."','$values');\n";
+        }
+    }
+    $GLOBALS['error'] = !file_put_contents(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'include'  . DIRECTORY_SEPARATOR . 'constants.php' , implode($constants));
     $_SESSION['settings']['authorized'] = false;
+    
 
     if ($result === true) {
         $_SESSION['UserLogin'] = true;
